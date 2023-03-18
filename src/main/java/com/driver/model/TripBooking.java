@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class TripBooking
+public class TripBooking
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

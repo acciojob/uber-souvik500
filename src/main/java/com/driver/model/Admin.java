@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class Admin
+public class Admin
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,5 @@ class Admin
     private String userName;
 
     @Column(nullable = false, unique = true)
-    private int password;
+    private String  password;
 }

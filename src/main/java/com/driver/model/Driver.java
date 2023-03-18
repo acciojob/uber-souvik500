@@ -12,17 +12,17 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class Driver
+public class Driver
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(nullable = false, unique = true)
-    private int mobile;
+    private String  mobile;
 
     @Column(nullable = false, unique = true)
-    private int password;
+    private String password;
 
     //parent(Driver) to Child (Cab) [1:1]
     @OneToOne (mappedBy = "driver", cascade = CascadeType.ALL)

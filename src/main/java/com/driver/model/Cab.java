@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class Cab
+public class Cab
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,8 @@ class Cab
     private int perKMRate;
 
     private boolean isAvailable;
+
+    private CabStatus cabStatus;
 
     //child (Cab) to Parent(Driver) [1:1]
     @OneToOne
