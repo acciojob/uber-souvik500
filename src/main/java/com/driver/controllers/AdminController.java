@@ -4,6 +4,8 @@ import com.driver.model.Admin;
 import com.driver.model.Customer;
 import com.driver.model.Driver;
 import com.driver.services.AdminService;
+import com.driver.services.DriverService;
+import com.driver.services.impl.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.HttpStatus;
@@ -16,13 +18,18 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
+	@Autowired
+	AdminService adminService;
+
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerAdmin(@RequestBody Admin admin){
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<Admin> updateAdminPassword(@RequestParam Integer adminId, @RequestParam String password){
+	public ResponseEntity<Admin> updateAdminPassword(@RequestParam Integer adminId, @RequestParam String password)
+	{
+		Admin updatedAdmin = adminService.updatePassword(adminId, password);
 		return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
 	}
 
@@ -31,12 +38,16 @@ public class AdminController {
 	}
 
 	@GetMapping("/listOfCustomers")
-	public List<Customer> listOfCustomers() {
+	public List<Customer> listOfCustomers()
+	{
+		List<Customer> listOfCustomers = adminService.getListOfCustomers();
 		return listOfCustomers;
 	}
 
 	@GetMapping("/listOfDrivers")
-	public List<Driver> listOfDrivers() {
+	public List<Driver> listOfDrivers()
+	{
+		List<Driver> listOfDrivers = adminService.getListOfDrivers();
 		return listOfDrivers;
 	}
 }
