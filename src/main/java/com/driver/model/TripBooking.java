@@ -1,6 +1,7 @@
 package com.driver.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class TripBooking
 {
     @Id
@@ -20,7 +22,7 @@ public class TripBooking
     private String fromLocation;
 
     @Column(nullable = false, unique = true)
-    private int toLocation;
+    private String toLocation;
 
     private int distanceInKM;
 
