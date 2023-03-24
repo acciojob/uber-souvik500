@@ -23,6 +23,7 @@ public class Cab
 
     private boolean isAvailable;
 
+    @Enumerated(value = EnumType.STRING)
     private CabStatus cabStatus;
 
     //child (Cab) to Parent(Driver) [1:1]

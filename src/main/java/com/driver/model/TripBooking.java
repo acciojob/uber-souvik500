@@ -29,6 +29,7 @@ public class TripBooking
     @Column(nullable = false)
     private int bill;
 
+    @Enumerated(value = EnumType.STRING)
     private TripStatus tripStatus;
 
     // Child(TripBooking) with Parent(Customer [Many:1]
