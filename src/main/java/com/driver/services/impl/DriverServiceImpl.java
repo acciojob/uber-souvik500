@@ -1,6 +1,7 @@
 package com.driver.services.impl;
 
 import com.driver.model.Cab;
+import com.driver.model.CabStatus;
 import com.driver.repository.CabRepository;
 import com.driver.services.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,13 @@ public class DriverServiceImpl implements DriverService {
 		driver.setMobile(mobile);
 		driver.setPassword(password);
 
+		Cab cab = new Cab();
+
+		cab.setDriver(driver);
+		cab.setCabStatus(CabStatus.AVAILABLE);
+		cab.setAvailable(true);
+		cab.setPerKMRate(100);
+
 		driverRepository3.save(driver);
 	}
 
@@ -39,6 +47,6 @@ public class DriverServiceImpl implements DriverService {
 		//Set the status of respective car to unavailable
 		Driver driver = driverRepository3.findById(driverId).get();
 
-		driver
+		driver.getCab().setCabStatus(CabStatus.UNAVAILABLE);
 	}
 }

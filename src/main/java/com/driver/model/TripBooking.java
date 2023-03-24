@@ -14,7 +14,7 @@ public class TripBooking
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int tripId;
 
     @Column(nullable = false, unique = true)
     private String fromLocation;
