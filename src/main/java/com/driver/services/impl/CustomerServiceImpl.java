@@ -40,12 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public TripBooking bookTrip(int customerId, String fromLocation, String toLocation, int distanceInKm) throws Exception{
 		//Book the driver with lowest driverId who is free (cab available variable is Boolean.TRUE). If no driver is available, throw "No cab available!" exception
 		//Avoid using SQL query
-		Customer customer;
-		try {
-			customer = customerRepository2.findById(customerId).get();
-		} catch (Exception e) {
-			throw new Exception("this Customer does not exists");
-		}
+		Customer customer = customerRepository2.findById(customerId).get();
 
 		TripBooking tripBooking = TripBooking.builder()
 				.fromLocation(fromLocation)
@@ -57,29 +52,41 @@ public class CustomerServiceImpl implements CustomerService {
 
 		List<Driver> driverList = driverRepository2.findAll();
 
-		Driver bestDriver = null;
-		for (Driver driver : driverList)
+		Driver driver = new Driver();
+
+		Cab cab = null;
+
+		boolean isCab = false;
+
+		for(Driver d : driverList)
 		{
-			if (driver.getCab().isAvailable())
-			{
-				if (driver.getId() < bestDriver.getId()) bestDriver = driver;
+			cab = d.getCab();
+			if(cab.isAvailable()){
+				driver = d;
+				isCab = true;
+				break;
 			}
+		}
+		if(!isCab){
+			throw new Exception("No cab available!");
 		}
 		/**
 		 * If none of the driver is free then
 		 */
-		if (bestDriver == null) throw new Exception("No cab available!");
+		//if (bestDriver == null) throw new Exception("No cab available!");
 
 
-		tripBooking.setDriver(bestDriver);
+		tripBooking.setDriver(driver);
 
-		Driver driver = tripBooking.getDriver();
+		driver = tripBooking.getDriver();
 		driver.getTripBookingList().add(tripBooking);
+		driver.getCab().setAvailable(false);
 
-		Cab cab = driver.getCab();
 		cab.setPerKMRate(100);
 
-		tripBooking.setBill(cab.getPerKMRate() * tripBooking.getDistanceInKM());
+		tripBooking.setBill(cab.getPerKMRate() * distanceInKm);
+
+		customer.getTripBookingList().add(tripBooking);
 
 		customerRepository2.save(customer);
 
