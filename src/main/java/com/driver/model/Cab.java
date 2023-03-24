@@ -18,12 +18,12 @@ public class Cab
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int perKMRate;
+    private int perKmRate;
 
-    private boolean isAvailable;
+    private boolean available;
 
-    @Enumerated(value = EnumType.STRING)
-    private CabStatus cabStatus;
+//    @Enumerated(value = EnumType.STRING)
+//    private CabStatus cabStatus;
 
     //child (Cab) to Parent(Driver) [1:1]
     @OneToOne

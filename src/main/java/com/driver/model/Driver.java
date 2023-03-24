@@ -18,12 +18,11 @@ public class Driver
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int driverId;
 
-    @Column(nullable = false, unique = true)
-    private String  mobile;
+    private String mobile;
 
-    @Column(nullable = false, unique = true)
+
     private String password;
 
     //parent(Driver) to Child (Cab) [1:1]

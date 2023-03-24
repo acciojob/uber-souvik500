@@ -16,13 +16,11 @@ public class Customer
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int customerId;
 
-    @Column(nullable = false, unique = true)
-    private int mobile;
+    private String mobile;
 
-    @Column(nullable = false, unique = true)
-    private int password;
+    private String password;
 
     //Parent(Customer) with Child(TripBooking) [1:Many]
     @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
