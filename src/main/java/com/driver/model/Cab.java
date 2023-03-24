@@ -18,7 +18,6 @@ public class Cab
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
     private int perKMRate;
 
     private boolean isAvailable;
