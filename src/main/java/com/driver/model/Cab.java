@@ -1,32 +1,56 @@
 package com.driver.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Cab
-{
+public class Cab {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
-
     private int perKmRate;
-
     private boolean available;
 
-//    @Enumerated(value = EnumType.STRING)
-//    private CabStatus cabStatus;
+    public Cab(){
 
-    //child (Cab) to Parent(Driver) [1:1]
-    @OneToOne
-    @JoinColumn
+    }
+    public Cab(int id, int perKmRate, boolean available) {
+        Id = id;
+        this.perKmRate = perKmRate;
+        this.available = available;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getPerKmRate() {
+        return perKmRate;
+    }
+
+    public void setPerKmRate(int perKmRate) {
+        this.perKmRate = perKmRate;
+    }
+
+    public boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+    @OneToOne(mappedBy = "cab", cascade = CascadeType.ALL)
     Driver driver;
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
 }

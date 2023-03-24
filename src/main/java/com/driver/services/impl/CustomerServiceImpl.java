@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 		boolean isCab = false;
 		for(Driver d : driverList){
 			cab = d.getCab();
-			if(cab.isAvailable() == true){
+			if(cab.getAvailable()){
 				driver = d;
 				isCab = true;
 				break;
