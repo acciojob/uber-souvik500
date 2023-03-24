@@ -18,15 +18,12 @@ public class TripBooking
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tripId;
 
-    @Column(nullable = false, unique = true)
     private String fromLocation;
 
-    @Column(nullable = false, unique = true)
     private String toLocation;
 
     private int distanceInKM;
 
-    @Column(nullable = false)
     private int bill;
 
     @Enumerated(value = EnumType.STRING)
@@ -39,5 +36,7 @@ public class TripBooking
 
 
     //Child(TripBooking) to parent(Driver) [Many:1]
+    @ManyToOne
+    @JoinColumn
     Driver driver;
 }
